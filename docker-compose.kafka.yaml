@@ -1,0 +1,13 @@
+  kafka-1:
+    image: confluentinc/cp-kafka:5.0.0
+    hostname: kafka-1
+    container_name: kafka-1
+    stop_grace_period: 3m
+    depends_on:
+      - zookeeper-1
+    ports:
+      - "29092:29092"
+    env_file:
+      - kafka.env
+    volumes:
+      - kafka-1-data:/var/lib/kafka/data/

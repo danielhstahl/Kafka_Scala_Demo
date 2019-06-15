@@ -1,0 +1,14 @@
+  zookeeper-1:
+    image: confluentinc/cp-zookeeper:5.0.0
+    hostname: zookeeper-1
+    container_name: zookeeper-1
+    ports:
+      - "2181:2181"
+    env_file:
+      - zookeeper.env
+    healthcheck:
+      test: /bin/sh -c '[ \"imok\" = \"$$(echo ruok | nc -w 1 127.0.0.1 2181)\" ]' || exit 1
+      interval: 1m
+    volumes:
+      - zookeeper-1-data:/var/lib/zookeeper/data/
+      - zookeeper-1-log:/var/lib/zookeeper/log/
